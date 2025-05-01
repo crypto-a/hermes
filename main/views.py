@@ -1,4 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+def index(request):
+    """
+    Renders the index page of the application.
+    :param request:
+    :return:
+    """
+    if request.user.is_authenticated:
+        return redirect("dashboard:index")
+
+    return redirect("/home")
 
 def home(request):
     """

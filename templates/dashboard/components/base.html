@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% block title %}Dashboard · Hermes{% endblock %}
+
+{% block content %}
+  <div class="flex min-h-screen bg-gray-100">
+    {# ← fixed, full-height sidebar #}
+    {% include "dashboard/components/_sidebar.html" %}
+
+    {# ← main panel (header + page content) #}
+    <div class="flex-1 flex">
+      {% include "dashboard/components/_header.html" %}
+
+      <main class="flex-1 max-w-7xl mx-auto py-16 px-6 mt-20">
+        {% block main %}
+        {% endblock %}
+      </main>
+    </div>
+  </div>
+{% endblock %}

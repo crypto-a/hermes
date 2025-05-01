@@ -5,3 +5,8 @@ from django.shortcuts import render
 @login_required
 def index(request):
     return render(request, "dashboard/index.html")
+
+
+@login_required
+def inbox(request):
+    return render(request, "dashboard/inbox.html")

@@ -12,9 +12,11 @@
     <main class="flex-grow">
       {% block content %}{% endblock %}
     </main>
-
-    <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
-      © {{ now|date:"Y" }} Hermes
-    </footer>
+    
+    {% block footer %}
+        <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+          © {{ now|date:"Y" }} Hermes
+        </footer>
+  {% endblock %}
   </body>
 </html>

@@ -7,11 +7,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .forms import LoginForm, RegisterForm, ProfileForm
 from django.contrib.auth.models import User
+
 
 
 def login_view(request):
@@ -76,32 +78,33 @@ def activate_account(request, uidb64, token):
 
 @login_required
 def profile_view(request):
-    user_form_initial = {
-        "first_name": request.user.first_name,
-        "last_name": request.user.last_name,
-        "email": request.user.email,
-        "username": request.user.username,
-    }
-    profile_form = ProfileForm(
-        request.POST or None,
-        request.FILES or None,
-        instance=request.user.profile,
-    )
-
-    if request.method == "POST" and profile_form.is_valid():
-        profile_form.save()
-        messages.success(request, "Profile updated successfully.")
-        return redirect("accounts:profile")
-
-    return render(
-        request,
-        "accounts/profile.html",
-        {
-            "user_form": user_form_initial,  # read-only in the template
-            "profile_form": profile_form,
-            "gravatar": _gravatar_url(request.user.email),
-        },
-    )
+    return HttpResponse("Profile view is not implemented yet.")
+    # user_form_initial = {
+    #     "first_name": request.user.first_name,
+    #     "last_name": request.user.last_name,
+    #     "email": request.user.email,
+    #     "username": request.user.username,
+    # }
+    # profile_form = ProfileForm(
+    #     request.POST or None,
+    #     request.FILES or None,
+    #     instance=request.user.profile,
+    # )
+    #
+    # if request.method == "POST" and profile_form.is_valid():
+    #     profile_form.save()
+    #     messages.success(request, "Profile updated successfully.")
+    #     return redirect("accounts:profile")
+    #
+    # return render(
+    #     request,
+    #     "accounts/profile.html",
+    #     {
+    #         "user_form": user_form_initial,  # read-only in the template
+    #         "profile_form": profile_form,
+    #         "gravatar": _gravatar_url(request.user.email),
+    #     },
+    # )
 
 
 def _gravatar_url(email, size=160):

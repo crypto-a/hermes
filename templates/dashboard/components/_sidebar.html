@@ -1,0 +1,36 @@
+{% url 'accounts:settings' as inbox_url %}
+
+
+<aside class="fixed inset-y-0 left-0 w-24 bg-gray-800 text-white shadow-lg mt-20">
+  <div class="flex flex-col h-full">
+
+    <!-- Top Buttons -->
+    <div class="px-4 py-6 flex flex-col items-center space-y-4">
+        <!-- Inbox -->
+        {% include "dashboard/components/_sidebar_box.html" with  url=inbox_url label="Inbox" icon_svg="inbox"%}
+        {% include "dashboard/components/_sidebar_box.html" %}
+        {% include "dashboard/components/_sidebar_box.html" %}
+        {% include "dashboard/components/_sidebar_box.html" %}
+    </div>
+  
+    <!-- Separator -->
+    <hr class="border-gray-700 my-4 mx-4" />
+
+    <!-- Account List (fills remaining) -->
+    <nav class="flex-1 overflow-y-auto px-4">
+      <ul class="space-y-3">
+        {% for account in request.user.accounts %}
+          <li>
+            <a href="{% url 'mail:inbox' account.id %}"
+               class="block px-3 py-2 rounded hover:bg-gray-700">
+              {{ account.name }}
+            </a>
+          </li>
+        {% empty %}
+          <li class="px-3 text-sm text-gray-400">No accounts</li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  </div>
+</aside>

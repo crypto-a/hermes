@@ -2,13 +2,23 @@
 {% block title %}Dashboard · Hermes{% endblock %}
 
 {% block content %}
-    {% include "dashboard/components/_header.html" %}
-    <div class="max-w-7xl mx-auto py-16">
-      <h1 class="text-3xl font-bold mb-8">
-        Welcome, {{ request.user.first_name|default:request.user.username }}!
-      </h1>
-      <p class="text-gray-700">
-        This will be your command center. Build widgets here ✨
-      </p>
+  <div class="flex min-h-screen bg-gray-100">
+    {# ← fixed, full-height sidebar #}
+    {% include "dashboard/components/_sidebar.html" %}
+
+    {# ← main panel (header + page content) #}
+    <div class="flex-1 flex">
+      {% include "dashboard/components/_header.html" %}
+
+      <main class="flex-1 max-w-7xl mx-auto py-16 px-6 mt-20">
+        <h1 class="text-3xl font-bold mb-8">
+          Welcome, {{ request.user.first_name|default:request.user.username }}!
+        </h1>
+        <p class="text-gray-700">
+          This will be your command center. Build widgets here ✨
+        </p>
+        {# …and here you’ve got all the “free space” to drop in widgets, charts, etc. #}
+      </main>
     </div>
+  </div>
 {% endblock %}

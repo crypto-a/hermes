@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Your profile · Hermes{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto pt-28">
+  <div class="grid md:grid-cols-3 gap-10">
+    <!-- left column -->
+    <aside class="md:col-span-1 bg-white shadow rounded-xl p-6">
+      <img src="{{ user.profile.picture.url|default:gravatar }}"
+           class="h-32 w-32 rounded-full object-cover mx-auto">
+      <h2 class="text-xl font-semibold text-center mt-4">
+        {{ request.user.get_full_name|default:request.user.username }}
+      </h2>
+      <p class="text-center text-sm text-gray-500">{{ request.user.email }}</p>
+      <a href="{% url 'password_change' %}"
+         class="mt-6 block text-center rounded-md bg-indigo-600
+                px-3.5 py-2.5 text-sm font-semibold text-white shadow hover:bg-indigo-500">
+        Change password
+      </a>
+    </aside>
+
+    <!-- right column -->
+    <section class="md:col-span-2 bg-white shadow rounded-xl p-8">
+      <h3 class="text-lg font-medium mb-6">Edit profile</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form|crispy }}
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}

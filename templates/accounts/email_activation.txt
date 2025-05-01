@@ -1,0 +1,13 @@
+Hello {{ user.first_name|default:user.username }},
+
+Welcome to Hermes 🚀
+
+Please activate your account by visiting the link below:
+
+{{ activation_url }}
+
+
+If you didn’t request this, just ignore this e-mail.
+
+—
+The Hermes team

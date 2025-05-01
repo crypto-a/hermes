@@ -1,51 +1,24 @@
 {% extends "base/base.html" %}
-{% load widget_tweaks %}
+{% load crispy_forms_tags %}
 {% block title %}Register · Hermes{% endblock %}
 
 {% block content %}
-<div class="max-w-lg mx-auto mt-24 bg-white shadow rounded-xl p-8">
-  <h2 class="text-2xl font-semibold text-center mb-6">Create your account</h2>
-
-  <form method="post" class="space-y-6">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Full name</label>
-      {{ form.name|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" }}
-      {{ form.name.errors }}
+    {% include "main/components/_header.html" %}
+    <div class="max-w-lg mx-auto mt-24 mb-24 bg-white shadow rounded-xl p-8">
+      <h2 class="text-2xl font-semibold text-center mb-6">Create your account</h2>
+    
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% crispy form %}
+      </form>
+    
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Already have an account?
+        <a href="{% url 'accounts:login' %}"
+           class="font-semibold text-indigo-600 hover:text-indigo-500">
+          Log in
+        </a>
+      </p>
     </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Username</label>
-      {{ form.username|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" }}
-      {{ form.username.errors }}
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Email</label>
-      {{ form.email|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" }}
-      {{ form.email.errors }}
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Password</label>
-      {{ form.password|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" }}
-      {{ form.password.errors }}
-    </div>
-
-    <button type="submit"
-            class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm
-                   font-semibold text-white shadow hover:bg-indigo-500">
-      Register
-    </button>
-  </form>
-
-  <p class="mt-6 text-center text-sm text-gray-600">
-    Already have an account?
-    <a href="{% url 'accounts:login' %}" class="font-semibold text-indigo-600 hover:text-indigo-500">
-      Log&nbsp;in
-    </a>
-  </p>
-</div>
 {% endblock %}

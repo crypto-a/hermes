@@ -158,3 +158,4 @@ EMAIL_PORT       = env.int("EMAIL_PORT")       # convert to int
 EMAIL_HOST_USER  = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS    = env.bool("EMAIL_USE_TLS")   # convert to bool
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

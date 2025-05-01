@@ -7,8 +7,8 @@
   <div class="grid md:grid-cols-3 gap-10">
     <!-- left column -->
     <aside class="md:col-span-1 bg-white shadow rounded-xl p-6">
-      <img src="{{ user.profile.picture.url|default:gravatar }}"
-           class="h-32 w-32 rounded-full object-cover mx-auto">
+{#      <img src="{{ user.profile.picture.url|default:gravatar }}"#}
+{#           class="h-32 w-32 rounded-full object-cover mx-auto">#}
       <h2 class="text-xl font-semibold text-center mt-4">
         {{ request.user.get_full_name|default:request.user.username }}
       </h2>

@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label="Username or E-mail")
+    username = forms.CharField(label="Username")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Hermes{% endblock %}</title>
+
+    <!-- Quick-start: CDN Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- For production: swap to django-tailwind or compile your own build -->
+  </head>
+  <body class="min-h-screen flex flex-col bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6">
+        <h1 class="text-3xl font-bold text-gray-900">
+          <a href="{% url 'main:home' %}">Hermes</a>
+        </h1>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+      © {{ now|date:"Y" }} Hermes
+    </footer>
+  </body>
+</html>

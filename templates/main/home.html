@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% block title %}Home · Hermes{% endblock %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold mb-4">Welcome!</h2>
+  <p class="mb-6">
+    This is the home page wired through the <code>main</code> app.
+  </p>
+
+  <a href="{% url 'accounts:login' %}"
+     class="inline-block rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+     Log in
+  </a>
+{% endblock %}

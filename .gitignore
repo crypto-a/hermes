@@ -1,2 +1,8 @@
 /.venv/
 .idea/
+/.env
+/db.sqlite3
+
+# Pycache
+*/__pycache__/*
+*/*/__pycache__/*

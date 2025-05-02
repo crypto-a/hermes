@@ -1,0 +1,23 @@
+<!-- dashboard/components/_email_card.html -->
+<li>
+  <a href="#"
+     class="_card block bg-white hover:bg-indigo-50 border border-gray-200 rounded-lg p-4
+            transition">
+    <div class="flex justify-between items-start">
+      <div>
+        <p class="text-sm font-medium text-gray-900">{{ subject }}</p>
+        <p class="text-xs text-gray-500">{{ sender }}</p>
+      </div>
+      <span class="ml-2 inline-flex items-center gap-1 text-xs">
+        <span class="text-gray-400">{{ date }}</span>
+        {% if unread %}
+          <span class="w-2 h-2 bg-indigo-600 rounded-full"></span>
+        {% endif %}
+      </span>
+    </div>
+    <div class="mt-2 flex items-center gap-2">
+      <span class="text-[10px] uppercase tracking-wider text-gray-400">{{ category }}</span>
+      <span class="text-[10px] px-1.5 py-0.5 rounded bg-gray-100">{{ priority }}</span>
+    </div>
+  </a>
+</li>

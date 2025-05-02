@@ -1,0 +1,46 @@
+{% extends "dashboard/components/base.html" %}
+
+{% block main %}
+  <h1 class="text-2xl font-semibold mb-6">Add a new email account</h1>
+
+  <form method="post"
+        class="space-y-6 max-w-lg"
+        action="{% url 'dashboard:add_account' %}">
+    {% csrf_token %}
+
+    <!-- Friendly account name -->
+    <div class="flex flex-col gap-2">
+      <label for="acc-name" class="text-sm font-medium text-gray-700">Account name</label>
+      <input id="acc-name" name="name" type="text" required
+             class="rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2"/>
+    </div>
+
+    <!-- Provider dropdown -->
+    <div class="flex flex-col gap-2">
+      <label for="acc-type" class="text-sm font-medium text-gray-700">Provider</label>
+      <select id="acc-type" name="type" required
+              class="rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2">
+        <option value="">Choose…</option>
+        <option value="google">Google (Gmail)</option>
+        <option value="microsoft">Microsoft Outlook / Office 365</option>
+        <option value="imap">Generic IMAP</option>
+      </select>
+    </div>
+
+    <!-- “What the agent should know about me” -->
+    <div class="flex flex-col gap-2">
+      <label for="acc-context" class="text-sm font-medium text-gray-700">
+        Let the agent know…
+      </label>
+      <textarea id="acc-context" name="context" rows="4"
+                placeholder="e.g. I’m student #123456, call me Alex internally…"
+                class="rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2"></textarea>
+    </div>
+
+    <button type="submit"
+            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow
+                   hover:bg-indigo-500">
+      Add &amp; connect
+    </button>
+  </form>
+{% endblock %}

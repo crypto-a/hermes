@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from mail.models import EmailAccount
+from mail.services import fetch_messages
+
 
 @login_required
 def index(request):
@@ -10,11 +13,16 @@ def index(request):
 
 @login_required
 def inbox(request):
+    accounts   = EmailAccount.objects.filter(user=request.user)
     categories = ["Primary", "Advertisements", "Notifications"]
-    return render(request, "dashboard/inbox.html", {
-        "categories": categories,
-        # … any other context …
-    })
+
+    # naive: always show first account’s first 20 msgs
+    first_msgs = fetch_messages(accounts.first()) if accounts else []
+
+    return render(request, "dashboard/inbox.html",
+                  {"categories": categories,
+                   "accounts": accounts,
+                   "emails": first_msgs})
 
 @login_required
 def add_account(request):

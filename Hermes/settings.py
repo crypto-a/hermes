@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "accounts.apps.AccountsConfig",
     "dashboard.apps.DashboardConfig",
+    "mail.apps.MailConfig",
 ]
 
 MIDDLEWARE = [
@@ -159,3 +160,9 @@ EMAIL_HOST_USER  = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS    = env.bool("EMAIL_USE_TLS")   # convert to bool
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+# Google OAuth — put these in your .env
+GOOGLE_CLIENT_ID     = env("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET")
+GOOGLE_REDIRECT_BASE = env("GOOGLE_REDIRECT_BASE")

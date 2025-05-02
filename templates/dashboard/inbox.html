@@ -11,12 +11,12 @@
       {% include "dashboard/components/inbox/_searchbar.html" %}
       {% include "dashboard/components/inbox/_category_slider.html" %}
 
-      <ul
-        id="email-list"
-        class="mt-4 space-y-2 pr-2"
-      >
-        {% include "dashboard/components/inbox/_email_card.html" with subject="Welcome to Hermes!" sender="Hermes Team" date="May 1" category="Primary" priority="High" unread=True %}
-        {% include "dashboard/components/inbox/_email_card.html" with subject="20 % off your next purchase" sender="Acme Corp" date="Apr 29" category="Advertisements" priority="Low" unread=False %}
+      <ul id="email-list" class="mt-4 space-y-2 pr-2">
+         {% for m in emails %}
+             {% include "dashboard/components/inbox/_email_card.html" with subject=m.subject sender=m.sender date=m.date category="Primary" priority="–" unread=True %}
+        {% empty %}
+             <p class="mt-10 text-sm text-gray-500">No email yet — connect an account.</p>
+        {% endfor %}
       </ul>
     </aside>
 

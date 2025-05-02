@@ -23,4 +23,6 @@ urlpatterns = [
     path("accounts/", include("accounts.urls", namespace="accounts")),
 
     path("dashboard/", include("dashboard.urls")),
+    path("mail/", include("mail.urls", namespace="mail")),
+
 ]

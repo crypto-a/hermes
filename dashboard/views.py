@@ -26,14 +26,13 @@ def inbox(request):
 
 @login_required
 def add_account(request):
-    """
-    Displays the “Add account” form. When the user presses **Add & Connect**
-    you will kick off your OAuth handshake in JS (or redirect-to-provider
-    in Python).  Keep the view simple for now.
-    """
     if request.method == "POST":
-        # TODO: start OAuth here – you’ll redirect instead of re-rendering
-        messages.success(request, "Redirecting you to consent…")
-        return redirect("dashboard:index")
+        provider = request.POST["type"]          # "google", "microsoft", …
+        # keep what the user typed; we’ll save it after the callback
+        request.session["pending_email_ctx"] = {
+            "display_name": request.POST["name"],
+            "context":      request.POST.get("context", ""),
+        }
+        return redirect("mail:start_oauth", provider=provider)
 
     return render(request, "dashboard/add_account.html")

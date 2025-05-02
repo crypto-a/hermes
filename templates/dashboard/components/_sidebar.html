@@ -22,6 +22,11 @@
         {# for account in request.user.emailaccount_set.all #}
         {#   include sidebar_box with initials etc. #}
         {# endfor #}
+          {% for account in accounts %}
+              <div class="mb-2">
+                {% include "dashboard/components/_sidebar_box.html" with url=inbox_url label=account.display_name icon_svg="account" %}
+              </div>
+          {% endfor %}
       </ul>
 
       {% include "dashboard/components/_sidebar_box.html" with url=add_account_url label="Add" icon_svg="add" %}

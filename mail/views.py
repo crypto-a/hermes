@@ -26,19 +26,21 @@ def start_oauth(request: HttpRequest, provider: str):
 
 @login_required
 def oauth_callback(request: HttpRequest, provider: str):
-    # state check
     if request.GET.get("state") != request.session.get("oauth_state"):
         return HttpResponseBadRequest("State mismatch")
 
-    prov_cls = get_provider(provider)
+    prov_cls   = get_provider(provider)
     token_data = prov_cls.fetch_token(request, request.GET["state"])
 
-    acct, _ = EmailAccount.objects.update_or_create(
+    pending = request.session.pop("pending_email_ctx", {})  # ‹— grab what we stored
+
+    EmailAccount.objects.update_or_create(
         user=request.user,
         email_address=token_data["email_address"],
         defaults={
             "provider":      provider,
-            "display_name":  token_data["display_name"],
+            "display_name":  pending.get("display_name") or token_data["display_name"],
+            "context":       pending.get("context", ""),
             "access_token":  token_data["access_token"],
             "refresh_token": token_data["refresh_token"],
             "expires_at":    token_data["expires_at"],
